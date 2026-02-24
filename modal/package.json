@@ -1,0 +1,37 @@
+{
+    "scripts": {
+        "env": ". ./activate",
+        "dev": "modal serve -m munshi_machine.functions.entrypoint --env=dev",
+        "run": "modal run -m munshi_machine.functions.entrypoint",
+        "deploy": "modal deploy -m munshi_machine.functions.entrypoint",
+        "profiles": "modal profile list",
+        "secret:list": "modal secret list",
+        "secret:create": "modal secret create",
+        "secret:delete": "modal secret delete",
+        "vol:list": "modal volume list",
+        "vol:get": "modal volume get",
+        "build": "",
+        "test": "",
+        "clean": "",
+        "db:revision": "alembic revision --autogenerate",
+
+        "db:upgrade": "alembic upgrade head",
+        "db:downgrade": "alembic downgrade -1",
+        "db:history": "alembic history --verbose",
+        "db:current": "alembic current",
+        "db:dryrun": "alembic upgrade head --sql",
+
+        "db:dryrun:down": " alembic downgrade -1 --sql",
+        "db:stamp:head": " alembic stamp head",
+        "db:stamp:base": " alembic stamp base",
+        "db:show": " alembic show",
+        "db:check": " alembic check",
+
+        "db:branches": " alembic branches",
+        "db:merge": " alembic merge",
+        "db:open": " alembic",
+
+        "db:upgrade:prod": "ENV=production alembic upgrade head",
+        "db:dryrun:prod": "ENV=production alembic upgrade head --sql"
+    }
+}
