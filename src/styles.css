@@ -142,3 +142,52 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .sidebar-lifted {
+    box-shadow: 
+      1px 0 0 0 oklch(0 0 0 / 0.05),
+      4px 0 24px -4px oklch(0 0 0 / 0.1),
+      2px 0 8px -2px oklch(0 0 0 / 0.05);
+    z-index: 10;
+  }
+
+  .dark .sidebar-lifted {
+    box-shadow: 
+      1px 0 0 0 oklch(1 0 0 / 0.1),
+      4px 0 24px -4px oklch(0 0 0 / 0.8),
+      2px 0 8px -2px oklch(0 0 0 / 0.4);
+  }
+
+  /* Handle right-sided sidebar shadow */
+  [data-side="right"] .sidebar-lifted,
+  .sidebar-lifted[data-side="right"] {
+    box-shadow: 
+      -1px 0 0 0 oklch(0 0 0 / 0.05),
+      -4px 0 24px -4px oklch(0 0 0 / 0.1),
+      -2px 0 8px -2px oklch(0 0 0 / 0.05);
+  }
+
+  .dark [data-side="right"] .sidebar-lifted,
+  .dark .sidebar-lifted[data-side="right"] {
+    box-shadow: 
+      -1px 0 0 0 oklch(1 0 0 / 0.1),
+      -4px 0 24px -4px oklch(0 0 0 / 0.8),
+      -2px 0 8px -2px oklch(0 0 0 / 0.4);
+  }
+
+  .card-lifted {
+    border: none !important;
+    box-shadow: 
+      0 0 1px oklch(from var(--card-900) l c h / 0.1),
+      0 10px 30px -10px oklch(from var(--card-900) l c h / 0.15),
+      0 4px 10px -2px oklch(from var(--card-900) l c h / 0.1);
+  }
+
+  .dark .card-lifted {
+    box-shadow: 
+      0 0 1px oklch(1 0 0 / 0.1),
+      0 10px 30px -10px oklch(0 0 0 / 0.6),
+      0 4px 10px -2px oklch(0 0 0 / 0.3);
+  }
+}

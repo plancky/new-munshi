@@ -1,14 +1,9 @@
 import Logo from "@/logo/logo.svg?react";
 import { Link, useLocation } from "@tanstack/react-router";
-import {
-    BarChart,
-    Home,
-    Package,
-    Settings,
-    Users
-} from "lucide-react";
+import { BarChart, Home, Package, Settings, Users } from "lucide-react";
 import * as React from "react";
 
+import { NavUser } from "@/components/dashboard/nav-user";
 import {
     Sidebar,
     SidebarContent,
@@ -21,7 +16,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { NavUser } from "@/components/dashboard/nav-user";
 import { BooksIcon, VinylRecordIcon } from "@phosphor-icons/react/dist/ssr";
 
 const data = {
@@ -62,7 +56,7 @@ const data = {
             title: "Cassetes",
             url: "/dashboard/cassetes",
             icon: VinylRecordIcon,
-        }
+        },
     ],
     navSettings: [
         {
@@ -79,9 +73,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     return (
         <Sidebar {...props}>
-            <SidebarHeader className="h-16 border-b border-sidebar-border px-6 justify-center">
-                <div className="flex items-center justify-center gap-2 font-semibold">
+            <SidebarHeader className="h-16 px-6 justify-center">
+                <div className="flex items-center justify-start gap-2 font-semibold">
                     <Logo className="h-8 text-foreground" />
+                    <h1 className="text-xl">Munshi</h1>
                 </div>
             </SidebarHeader>
             <SidebarContent>
@@ -92,7 +87,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton
                                         asChild
-                                        isActive={pathname === item.url || (item.url === "/dashboard" && pathname === "/dashboard/")}
+                                        isActive={
+                                            pathname === item.url ||
+                                            (item.url === "/dashboard" &&
+                                                pathname === "/dashboard/")
+                                        }
                                     >
                                         <Link to={item.url}>
                                             <item.icon />

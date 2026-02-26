@@ -45,7 +45,7 @@ function DashboardIndex() {
                 </TabsList>
                 <TabsContent value="overview" className="space-y-4">
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <Card>
+                        <Card className="card-lifted">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
                                     Total Revenue
@@ -72,7 +72,7 @@ function DashboardIndex() {
                                 </p>
                             </CardContent>
                         </Card>
-                        <Card>
+                        <Card className="card-lifted">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
                                     Subscriptions
@@ -101,7 +101,7 @@ function DashboardIndex() {
                                 </p>
                             </CardContent>
                         </Card>
-                        <Card>
+                        <Card className="card-lifted">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
                                     Sales
@@ -135,7 +135,7 @@ function DashboardIndex() {
                                 </p>
                             </CardContent>
                         </Card>
-                        <Card>
+                        <Card className="card-lifted">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
                                     Active Now
@@ -164,7 +164,7 @@ function DashboardIndex() {
                         </Card>
                     </div>
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                        <Card className="col-span-4">
+                        <Card className="col-span-4 card-lifted">
                             <CardHeader>
                                 <CardTitle>Overview</CardTitle>
                             </CardHeader>
@@ -172,7 +172,7 @@ function DashboardIndex() {
                                 <Overview />
                             </CardContent>
                         </Card>
-                        <Card className="col-span-3">
+                        <Card className="col-span-3 card-lifted">
                             <CardHeader>
                                 <CardTitle>Recent Sales</CardTitle>
                                 <CardDescription>
