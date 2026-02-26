@@ -1,99 +1,54 @@
-import { Link } from '@tanstack/react-router'
-
-import ClerkHeader from '../integrations/clerk/header-user.tsx'
-
-import { useState } from 'react'
-import { Database, Globe, Home, Menu, X } from 'lucide-react'
+import Logo from "@/logo/logo.svg?react";
+import { BooksIcon, StackIcon } from "@phosphor-icons/react/dist/ssr";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+    return (
+        <div className="relative z-50">
+            <header className="content-grid fixed w-full py-4">
+                <div className="content lg:breakout flex items-center justify-between rounded-xl border border-border/60 bg-background/70 px-4 py-3 shadow backdrop-blur-sm transition-colors">
+                    <a href="/" className="group flex items-center gap-3">
+                        <span className="font-normal transition-transform duration-200 group-hover:scale-105">
+                            <Logo className="h-8 text-foreground" />
+                        </span>
+                        <span className="hidden font-heading text-base font-medium text-foreground lg:block">
+                            Munshi
+                        </span>
+                    </a>
 
-  return (
-    <>
-      <header className="p-4 flex items-center bg-gray-800 text-white shadow-lg">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu size={24} />
-        </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
-      </header>
-
-      <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Navigation</h2>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                            <a
+                                href="/catalogue"
+                                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+                            >
+                                <BooksIcon className="h-4 w-4" />
+                                <span className="hidden sm:block">
+                                    Catalogue
+                                </span>
+                            </a>
+                            <a
+                                href="/collections"
+                                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+                            >
+                                <StackIcon className="h-4 w-4" />
+                                <span className="hidden sm:block">
+                                    Collections
+                                </span>
+                            </a>
+                            {/* <a
+                                href="/ask"
+                                className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+                            >
+                                <StackIcon className="h-4 w-4" />
+                                <span className="hidden sm:block">
+                                    Ask Munshi
+                                </span>
+                            </a> */}
+                        </div>
+                        <div className="h-4 w-px bg-border/60" />
+                    </div>
+                </div>
+            </header>
         </div>
-
-        <nav className="flex-1 p-4 overflow-y-auto">
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Home size={20} />
-            <span className="font-medium">Home</span>
-          </Link>
-
-          {/* Demo Links Start */}
-
-          <Link
-            to="/demo/clerk"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Globe size={20} />
-            <span className="font-medium">Clerk</span>
-          </Link>
-
-          <Link
-            to="/demo/neon"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Database size={20} />
-            <span className="font-medium">Neon</span>
-          </Link>
-
-          {/* Demo Links End */}
-        </nav>
-
-        <div className="p-4 border-t border-gray-700 bg-gray-800 flex flex-col gap-2">
-          <ClerkHeader />
-        </div>
-      </aside>
-    </>
-  )
+    );
 }

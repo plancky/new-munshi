@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "skills": {
+    "vite-shadcn-tailwind4": {
+      "source": "igorwarzocha/opencode-workflows",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/igorwarzocha/opencode-workflows.git",
+      "skillPath": "agents/vite-react-ts-convex-tailwind/.opencode/skill/vite-shadcn-tailwind4/SKILL.md",
+      "skillFolderHash": "b550cf929dd423f9b6f942f1e8bcc9b056aca271",
+      "installedAt": "2026-02-24T18:38:00.970Z",
+      "updatedAt": "2026-02-24T18:38:00.970Z"
+    }
+  },
+  "dismissed": {}
+}
