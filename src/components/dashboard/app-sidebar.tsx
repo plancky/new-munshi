@@ -1,99 +1,152 @@
-import * as React from "react"
-import { Link } from "@tanstack/react-router"
+import Logo from "@/logo/logo.svg?react";
+import { Link, useLocation } from "@tanstack/react-router";
 import {
-  BarChart,
-  Bell,
-  FileText,
-  Home,
-  Package,
-  Settings,
-  Users,
-} from "lucide-react"
+    BarChart,
+    Home,
+    Package,
+    Settings,
+    Users
+} from "lucide-react";
+import * as React from "react";
 
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { NavUser } from "@/components/dashboard/nav-user";
+import { BooksIcon, VinylRecordIcon } from "@phosphor-icons/react/dist/ssr";
 
 const data = {
-  navMain: [
-    {
-      title: "Overview",
-      url: "/dashboard",
-      icon: Home,
+    user: {
+        name: "chirag",
+        email: "chirag@trymunshi.com",
+        avatar: "/avatars/01.png",
     },
-    {
-      title: "Customers",
-      url: "/dashboard",
-      icon: Users,
-    },
-    {
-      title: "Products",
-      url: "/dashboard",
-      icon: Package,
-    },
-    {
-      title: "Analytics",
-      url: "/dashboard",
-      icon: BarChart,
-    },
-    {
-      title: "Reports",
-      url: "/dashboard",
-      icon: FileText,
-    },
-    {
-      title: "Notifications",
-      url: "/dashboard",
-      icon: Bell,
-    },
-    {
-      title: "Settings",
-      url: "/dashboard",
-      icon: Settings,
-    },
-  ],
-}
+    navMain: [
+        {
+            title: "Overview",
+            url: "/dashboard",
+            icon: Home,
+        },
+        {
+            title: "Whispers",
+            url: "/dashboard/whispers",
+            icon: Users,
+        },
+        {
+            title: "Tangents",
+            url: "/dashboard/tangents",
+            icon: Package,
+        },
+        {
+            title: "Insights",
+            url: "/dashboard/insights",
+            icon: BarChart,
+        },
+    ],
+    dataRoomNav: [
+        {
+            title: "Transcripts",
+            url: "/dashboard/transcripts",
+            icon: BooksIcon,
+        },
+        {
+            title: "Cassetes",
+            url: "/dashboard/cassetes",
+            icon: VinylRecordIcon,
+        }
+    ],
+    navSettings: [
+        {
+            title: "Settings",
+            url: "/dashboard/settings",
+            icon: Settings,
+        },
+    ],
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar {...props}>
-      <SidebarHeader className="h-16 border-b border-sidebar-border px-6 justify-center">
-        <div className="flex items-center gap-2 font-semibold">
-          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <Package className="size-4" />
-          </div>
-          <span className="truncate">SaaS Munshi</span>
-        </div>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {data.navMain.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={item.title === "Overview"}>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
-  )
+    const location = useLocation();
+    const pathname = location.pathname;
+
+    return (
+        <Sidebar {...props}>
+            <SidebarHeader className="h-16 border-b border-sidebar-border px-6 justify-center">
+                <div className="flex items-center justify-center gap-2 font-semibold">
+                    <Logo className="h-8 text-foreground" />
+                </div>
+            </SidebarHeader>
+            <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {data.navMain.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={pathname === item.url || (item.url === "/dashboard" && pathname === "/dashboard/")}
+                                    >
+                                        <Link to={item.url}>
+                                            <item.icon />
+                                            <span>{item.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel>Data Room</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {data.dataRoomNav.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={pathname === item.url}
+                                    >
+                                        <Link to={item.url}>
+                                            <item.icon />
+                                            <span>{item.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            </SidebarContent>
+            <SidebarFooter>
+                <SidebarGroup>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            {data.navSettings.map((item) => (
+                                <SidebarMenuItem key={item.title}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={pathname === item.url}
+                                    >
+                                        <Link to={item.url}>
+                                            <item.icon />
+                                            <span>{item.title}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <NavUser user={data.user} />
+            </SidebarFooter>
+        </Sidebar>
+    );
 }

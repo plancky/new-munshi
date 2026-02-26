@@ -11,8 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DemoNeonRouteImport } from './routes/demo/neon'
 import { Route as DemoClerkRouteImport } from './routes/demo/clerk'
+import { Route as DashboardWhispersRouteImport } from './routes/dashboard/whispers'
+import { Route as DashboardTranscriptsRouteImport } from './routes/dashboard/transcripts'
+import { Route as DashboardTangentsRouteImport } from './routes/dashboard/tangents'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
+import { Route as DashboardInsightsRouteImport } from './routes/dashboard/insights'
+import { Route as DashboardCassetesRouteImport } from './routes/dashboard/cassetes'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -24,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DemoNeonRoute = DemoNeonRouteImport.update({
   id: '/demo/neon',
   path: '/demo/neon',
@@ -34,37 +46,120 @@ const DemoClerkRoute = DemoClerkRouteImport.update({
   path: '/demo/clerk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardWhispersRoute = DashboardWhispersRouteImport.update({
+  id: '/whispers',
+  path: '/whispers',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTranscriptsRoute = DashboardTranscriptsRouteImport.update({
+  id: '/transcripts',
+  path: '/transcripts',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTangentsRoute = DashboardTangentsRouteImport.update({
+  id: '/tangents',
+  path: '/tangents',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInsightsRoute = DashboardInsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCassetesRoute = DashboardCassetesRouteImport.update({
+  id: '/cassetes',
+  path: '/cassetes',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/cassetes': typeof DashboardCassetesRoute
+  '/dashboard/insights': typeof DashboardInsightsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tangents': typeof DashboardTangentsRoute
+  '/dashboard/transcripts': typeof DashboardTranscriptsRoute
+  '/dashboard/whispers': typeof DashboardWhispersRoute
   '/demo/clerk': typeof DemoClerkRoute
   '/demo/neon': typeof DemoNeonRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/dashboard/cassetes': typeof DashboardCassetesRoute
+  '/dashboard/insights': typeof DashboardInsightsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tangents': typeof DashboardTangentsRoute
+  '/dashboard/transcripts': typeof DashboardTranscriptsRoute
+  '/dashboard/whispers': typeof DashboardWhispersRoute
   '/demo/clerk': typeof DemoClerkRoute
   '/demo/neon': typeof DemoNeonRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/cassetes': typeof DashboardCassetesRoute
+  '/dashboard/insights': typeof DashboardInsightsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tangents': typeof DashboardTangentsRoute
+  '/dashboard/transcripts': typeof DashboardTranscriptsRoute
+  '/dashboard/whispers': typeof DashboardWhispersRoute
   '/demo/clerk': typeof DemoClerkRoute
   '/demo/neon': typeof DemoNeonRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/demo/clerk' | '/demo/neon'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/cassetes'
+    | '/dashboard/insights'
+    | '/dashboard/settings'
+    | '/dashboard/tangents'
+    | '/dashboard/transcripts'
+    | '/dashboard/whispers'
+    | '/demo/clerk'
+    | '/demo/neon'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/demo/clerk' | '/demo/neon'
-  id: '__root__' | '/' | '/dashboard' | '/demo/clerk' | '/demo/neon'
+  to:
+    | '/'
+    | '/dashboard/cassetes'
+    | '/dashboard/insights'
+    | '/dashboard/settings'
+    | '/dashboard/tangents'
+    | '/dashboard/transcripts'
+    | '/dashboard/whispers'
+    | '/demo/clerk'
+    | '/demo/neon'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/dashboard/cassetes'
+    | '/dashboard/insights'
+    | '/dashboard/settings'
+    | '/dashboard/tangents'
+    | '/dashboard/transcripts'
+    | '/dashboard/whispers'
+    | '/demo/clerk'
+    | '/demo/neon'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardRoute: typeof DashboardRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   DemoClerkRoute: typeof DemoClerkRoute
   DemoNeonRoute: typeof DemoNeonRoute
 }
@@ -85,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/demo/neon': {
       id: '/demo/neon'
       path: '/demo/neon'
@@ -99,12 +201,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoClerkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/whispers': {
+      id: '/dashboard/whispers'
+      path: '/whispers'
+      fullPath: '/dashboard/whispers'
+      preLoaderRoute: typeof DashboardWhispersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/transcripts': {
+      id: '/dashboard/transcripts'
+      path: '/transcripts'
+      fullPath: '/dashboard/transcripts'
+      preLoaderRoute: typeof DashboardTranscriptsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/tangents': {
+      id: '/dashboard/tangents'
+      path: '/tangents'
+      fullPath: '/dashboard/tangents'
+      preLoaderRoute: typeof DashboardTangentsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/insights': {
+      id: '/dashboard/insights'
+      path: '/insights'
+      fullPath: '/dashboard/insights'
+      preLoaderRoute: typeof DashboardInsightsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/cassetes': {
+      id: '/dashboard/cassetes'
+      path: '/cassetes'
+      fullPath: '/dashboard/cassetes'
+      preLoaderRoute: typeof DashboardCassetesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardCassetesRoute: typeof DashboardCassetesRoute
+  DashboardInsightsRoute: typeof DashboardInsightsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardTangentsRoute: typeof DashboardTangentsRoute
+  DashboardTranscriptsRoute: typeof DashboardTranscriptsRoute
+  DashboardWhispersRoute: typeof DashboardWhispersRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardCassetesRoute: DashboardCassetesRoute,
+  DashboardInsightsRoute: DashboardInsightsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardTangentsRoute: DashboardTangentsRoute,
+  DashboardTranscriptsRoute: DashboardTranscriptsRoute,
+  DashboardWhispersRoute: DashboardWhispersRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   DemoClerkRoute: DemoClerkRoute,
   DemoNeonRoute: DemoNeonRoute,
 }
